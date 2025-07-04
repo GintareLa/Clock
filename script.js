@@ -3,6 +3,7 @@ const timeEl = document.getElementsByClassName('time')[0];
 const hourEl = document.getElementsByClassName('hours')[0];
 const minsEl = document.getElementsByClassName('minutes')[0];
 const secsEl = document.getElementsByClassName('seconds')[0];
+const slideEl = document.getElementsByClassName('slider')[0];
 
 const weekdays = [
     'Sekmadienis',
@@ -59,3 +60,27 @@ function clock() {
  }
 
  clock();
+ let isPomo = false;
+
+ slideEl.addEventListener('click', () => {
+    isPomo ? (isPomo = false) : (isPomo = true);
+    slideEl.classList.toggle('active');
+    // timeEl.classList.toggle('work');
+    isPomo? work() : kill();
+ });
+
+ function work() {
+    timeEl.classList.remove('chill');
+    timeEl.classList.add('work');
+    isPomo ? setTimeout(chill, 25 * 60 * 1000): kill();
+ }
+ function chill() {
+    timeEl.classList.remove('work');
+    timeEl.classList.add('chill');
+      isPomo? setTimeout(work, 5* 60 * 1000): kill();
+ }
+ function kill() {
+    timeEl.classList.remove('work');
+    timeEl.classList.remove('chill');
+
+ }

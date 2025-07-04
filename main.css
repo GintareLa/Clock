@@ -108,11 +108,16 @@ body {
 }
 /* laikinai */
 
-.slider:hover {
+.active {
     background-color: tomato;
 }
-.slider:hover .dot{
+.active .dot{
     background-color: #fff;
     transform: translateX(30px);
 }
-
+.work {
+    color: tomato;
+}
+.chill {
+    color: limegreen;
+}
