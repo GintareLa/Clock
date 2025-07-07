@@ -4,6 +4,7 @@ const hourEl = document.getElementsByClassName('hours')[0];
 const minsEl = document.getElementsByClassName('minutes')[0];
 const secsEl = document.getElementsByClassName('seconds')[0];
 const slideEl = document.getElementsByClassName('slider')[0];
+const pomobgEl = document.getElementsByClassName('pomo-bg')[0];
 
 const weekdays = [
     'Sekmadienis',
@@ -65,22 +66,33 @@ function clock() {
  slideEl.addEventListener('click', () => {
     isPomo ? (isPomo = false) : (isPomo = true);
     slideEl.classList.toggle('active');
-    // timeEl.classList.toggle('work');
+    show(false);
+    pomobgEl.classList.add('show');
     isPomo? work() : kill();
  });
 
  function work() {
     timeEl.classList.remove('chill');
     timeEl.classList.add('work');
-    isPomo ? setTimeout(chill, 25 * 60 * 1000): kill();
+    isPomo ? setTimeout(chill, 25 * 1 * 1000): kill(); //60
  }
  function chill() {
     timeEl.classList.remove('work');
     timeEl.classList.add('chill');
-      isPomo? setTimeout(work, 5* 60 * 1000): kill();
+    show(true);
+   isPomo? setTimeout(work, 5* 1 * 1000): kill(); //60
  }
  function kill() {
     timeEl.classList.remove('work');
     timeEl.classList.remove('chill');
+    pomobgEl.classList.remove('show');
+ }
 
+ function show(afterFive) {
+   const now = new Date()
+   let min = now.getSeconds(); //getMinutes
+   afterFive? (min +=5) : min;
+   min > 59 ? (min = 60) : min;
+   const deg = min * 6 + 90;
+   pomobgEl.style.transform = 'rotate(' + deg + 'deg)';
  }
